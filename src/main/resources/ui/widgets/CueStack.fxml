@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<fx:root xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" type="javafx.scene.control.Tab"
+         text="Default Cue Stack">
+    <TableView fx:id="tableView" editable="false" stylesheets="/css/widgets/CueStack.css">
+        <columns>
+            <TableColumn fx:id="numberCell" text="#" prefWidth="80" sortable="false" minWidth="80" maxWidth="80"
+                         styleClass="centered-cell">
+                <cellValueFactory>
+                    <PropertyValueFactory property="number" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="nameCell" text="Name" sortable="false">
+                <cellValueFactory>
+                    <PropertyValueFactory property="name" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="descriptionCell" text="Description" prefWidth="200" sortable="false">
+                <cellValueFactory>
+                    <PropertyValueFactory property="description" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="preWaitCell" text="Pre-Wait" sortable="false" styleClass="centered-cell">
+                <cellValueFactory>
+                    <PropertyValueFactory property="preWaitProgress" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn fx:id="actionCell" text="Action" sortable="false" styleClass="centered-cell">
+                <!-- CellValueFactory must be dynamically set, not all cues provide an action duration -->
+            </TableColumn>
+            <TableColumn fx:id="postWaitCell" text="Post-Wait" sortable="false" styleClass="centered-cell">
+                <cellValueFactory>
+                    <PropertyValueFactory property="postWaitProgress" />
+                </cellValueFactory>
+            </TableColumn>
+        </columns>
+    </TableView>
+</fx:root>

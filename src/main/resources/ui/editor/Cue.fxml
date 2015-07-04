@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Spinner?>
+<?import soundclip.gui.TimePicker?>
+<fx:root xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" type="javafx.scene.layout.GridPane"
+        alignment="CENTER" hgap="5" vgap="5">
+    <Label text="Number:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <Spinner fx:id="number" GridPane.ColumnIndex="1" GridPane.rowIndex="0"
+            editable="true" min="0.0" max="99999.0" initialValue="1.0" amountToStepBy="0.1" GridPane.columnSpan="3"/>
+
+    <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <TextField fx:id="name" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3"/>
+
+    <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <TextField fx:id="description" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.columnSpan="3"/>
+
+    <Label text="Notes:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <TextArea fx:id="notes" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.columnSpan="3"/>
+
+    <Label text="Pre-Wait:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+    <TimePicker fx:id="preWait" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+    <Label text="Post-Wait:" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+    <TimePicker fx:id="postWait" GridPane.columnIndex="3" GridPane.rowIndex="4"/>
+</fx:root>

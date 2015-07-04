@@ -1,0 +1,9 @@
+.root{
+    -progress-green: #1a6c1a;
+    -progress-red: #ff0303;
+    -progress-yellow: #ffd742;
+}
+
+#cueStackContainer {
+    -fx-background-color: #fce;
+}

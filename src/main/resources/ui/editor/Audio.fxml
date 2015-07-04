@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import soundclip.gui.TimePicker?>
+<fx:root xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+         type="javafx.scene.layout.GridPane" stylesheets="/css/editor/Audio.css"
+         alignment="CENTER" hgap="5" vgap="5">
+
+    <Label text="Source:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+    <TextField fx:id="source" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
+    <Button text="..." onAction="#onFileSourceBrowseClicked" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+    <Label text="Volume:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <Slider fx:id="volume" min="0.0" max="1.0" GridPane.columnIndex="1" GridPane.rowIndex="1"
+            GridPane.columnSpan="3"/>
+
+    <Label text="Pan:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+    <Slider fx:id="pan" min="-1.0" max="1.0" GridPane.columnIndex="1" GridPane.rowIndex="2"
+            GridPane.columnSpan="3"/>
+
+    <Label text="Fade In Over:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+    <TimePicker fx:id="fadeIn" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    <Label text="Fade Out Over:" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+    <TimePicker fx:id="fadeOut" GridPane.columnIndex="3" GridPane.rowIndex="3"/>
+</fx:root>

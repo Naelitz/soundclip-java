@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+
+<fx:root xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" type="javafx.scene.layout.GridPane"
+         vgap="10" hgap="5" alignment="center" stylesheets="/css/About.css">
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" />
+        <ColumnConstraints halignment="CENTER" />
+    </columnConstraints>
+    <Label text="soundclip" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />
+    <!-- TODO: Figure out why the below label is left-aligned -->
+    <Label text="Version:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+    <Label fx:id="versionLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Hyperlink text="https://github.com/techwiz24/soundclip" onAction="#onProjectLinkClicked"
+               GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" />
+    <Label text="Copyright 2015 Nathan Lowe" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="2" />
+    <Label text="This program comes with absolutely no warrenty" GridPane.columnIndex="0" GridPane.rowIndex="4"
+           GridPane.ColumnSpan="2"/>
+    <Hyperlink text="See the GNU General Public License, Version 3 or later for details"
+               onAction="#onLicenseLinkClicked" GridPane.columnIndex="0" GridPane.rowIndex="5"
+               GridPane.ColumnSpan="2" />
+</fx:root>

@@ -1,0 +1,31 @@
+#openProject {
+    -fx-graphic: url('/img/ic_folder_open_black_24dp.png');
+}
+
+#saveProject {
+    -fx-graphic: url('/img/ic_save_black_24dp.png');
+}
+
+#newProject {
+    -fx-graphic: url('/img/ic_insert_drive_file_black_24dp_1x.png');
+}
+
+#addItem {
+    -fx-graphic: url('/img/ic_add_box_black_24dp.png');
+}
+
+#panic {
+    -fx-graphic: url('/img/ic_warning_black_24dp_1x.png')
+}
+
+#lockWorkspace {
+    -fx-graphic: url('/img/ic_lock_open_black_24dp_1x.png');
+}
+
+#lockWorkspace:selected {
+    -fx-graphic: url('/img/ic_lock_black_24dp_1x.png');
+}
+
+#menu {
+    -fx-graphic: url('/img/ic_settings_black_24dp_1x.png');
+}
