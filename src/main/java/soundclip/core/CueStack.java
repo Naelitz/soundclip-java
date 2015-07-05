@@ -6,7 +6,9 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.util.Duration;
 
+import soundclip.SoundClip;
 import soundclip.api.Cue;
+import soundclip.api.Fadeable;
 import soundclip.api.Storable;
 
 /**
@@ -37,6 +39,19 @@ public class CueStack extends SimpleListProperty<Cue> implements Storable{
         test.setDescription("This is a test cue!");
         test.setPreWaitDelay(Duration.millis(253296));
         add(test);
+    }
+
+    public void panic(boolean hard){
+        forEach((cue) -> {
+            if (hard || !(cue instanceof Fadeable)) {
+                cue.stop();
+            } else {
+                ((Fadeable) cue).fadeOutOver(SoundClip.instance().getCurrentProject().getPanicFadeTime(), (cb) -> {
+                    // Just in case some cues aren't implemented correctly
+                    cue.stop();
+                });
+            }
+        });
     }
 
     @Override

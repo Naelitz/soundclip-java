@@ -14,6 +14,7 @@ import javafx.util.Duration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import soundclip.SoundClip;
 import soundclip.api.Cue;
 import soundclip.api.ProgressProvider;
 import soundclip.core.CueStack;
@@ -169,6 +170,8 @@ public class CueStackView extends Tab{
                 c.go();
             }else if(event.getCode() == KeyCode.BACK_SPACE && c != null){
                 c.stop();
+            }else if(event.getCode() == KeyCode.ESCAPE){
+                SoundClip.instance().getCurrentProject().panic(false);
             }
         });
     }

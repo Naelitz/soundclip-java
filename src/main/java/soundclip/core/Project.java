@@ -27,16 +27,26 @@ public class Project extends SimpleListProperty<CueStack> implements Storable{
     private StringProperty name = new SimpleStringProperty("Untitled Project");
     private StringProperty author = new SimpleStringProperty("");
 
-    private ObjectProperty<Duration> panicFadeTime = new SimpleObjectProperty<>(Duration.millis(500));
-    private ObjectProperty<Duration> panicHardStopTime = new SimpleObjectProperty<>(Duration.seconds(1));
+    private ObjectProperty<Duration> panicFadeTime = new SimpleObjectProperty<>(Duration.millis(1500));
 
     private StringProperty pathOnDisk = new SimpleStringProperty("Not Saved");
+    private long lastPanicTime = 0L;
 
     public Project(){
         super(FXCollections.observableArrayList());
         CueStack defaultCueStack = new CueStack();
         defaultCueStack.setName("Default Cue Stack");
         add(defaultCueStack);
+    }
+
+    public void panic(boolean hard){
+        Duration delta = Duration.millis(System.currentTimeMillis() - lastPanicTime);
+
+        forEach((cueStack) -> cueStack.panic(
+                hard || getPanicFadeTime().subtract(delta).greaterThan(Duration.ZERO)
+        ));
+
+        lastPanicTime = System.currentTimeMillis();
     }
 
     @Override
@@ -74,18 +84,6 @@ public class Project extends SimpleListProperty<CueStack> implements Storable{
 
     public void setPanicFadeTime(Duration panicFadeTime) {
         this.panicFadeTime.set(panicFadeTime);
-    }
-
-    public Duration getPanicHardStopTime() {
-        return panicHardStopTime.get();
-    }
-
-    public ObjectProperty<Duration> panicHardStopTimeProperty() {
-        return panicHardStopTime;
-    }
-
-    public void setPanicHardStopTime(Duration panicHardStopTime) {
-        this.panicHardStopTime.set(panicHardStopTime);
     }
 
     public String getPathOnDisk() {

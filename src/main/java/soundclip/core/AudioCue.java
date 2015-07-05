@@ -205,9 +205,17 @@ public class AudioCue extends Cue implements Fadeable, Resumable, ProgressProvid
     @Override
     public void stop() {
         if(fadeOutTime.getValue().greaterThan(Duration.ZERO) && !fadeOutTime.getValue().equals(Duration.INDEFINITE)){
-            fadeOutOver(fadeOutTime.getValue(), (event -> backend.stop()));
+            fadeOutOver(fadeOutTime.getValue(), (event -> {
+                backend.stop();
+
+                // Reset volume
+                backend.setVolume(getVolume());
+            }));
         }else{
             backend.stop();
+
+            // Reset Volume
+            backend.setVolume(getVolume());
         }
     }
 

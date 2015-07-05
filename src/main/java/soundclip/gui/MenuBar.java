@@ -161,7 +161,8 @@ public class MenuBar extends ToolBar {
 
     @FXML
     protected void onPanicClicked(ActionEvent click){
-        log.debug("TODO: Panic");
+        log.debug("Panic!");
+        SoundClip.instance().getCurrentProject().panic(false);
     }
 
     @FXML
