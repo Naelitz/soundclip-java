@@ -11,6 +11,7 @@ import javafx.util.Pair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Optional;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -98,6 +99,18 @@ public class MenuBar extends ToolBar {
     private void onAddItem(String id){
         if(id.equalsIgnoreCase("soundclip.core.cuelist")){
             log.debug("TODO: Add new cue list");
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("New Cue List");
+            dialog.setContentText("Cue List Name:");
+
+            Optional<String> result = dialog.showAndWait();
+
+            result.ifPresent(name -> {
+                CueStack stack = new CueStack();
+                stack.setName(name);
+
+                SoundClip.instance().getCurrentProject().add(stack);
+            });
         }else{
             log.debug("TODO: Creating editor dialog for cue instance of " + id);
 

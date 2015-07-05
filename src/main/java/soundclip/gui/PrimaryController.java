@@ -41,11 +41,21 @@ public class PrimaryController extends BorderPane{
 
         SoundClip.instance().currentProjectProperty().addListener(((observable, oldValue, newValue) -> {
             if(newValue != null){
-                cueStackContainer.getTabs().removeAll();
+                cueStackContainer.getTabs().clear();
                 newValue.stream().forEach((stack) -> {
                     CueStackView view = new CueStackView();
                     view.setModel(stack);
                     cueStackContainer.getTabs().add(view);
+                });
+
+                newValue.addListener((stack, oldStack, newStack) -> {
+                    //TODO: Optomize so that we only add new tabs
+                    cueStackContainer.getTabs().clear();
+                    newStack.stream().forEach((cueStack) -> {
+                        CueStackView view = new CueStackView();
+                        view.setModel(cueStack);
+                        cueStackContainer.getTabs().add(view);
+                    });
                 });
             }
         }));
