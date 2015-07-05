@@ -188,6 +188,8 @@ public class CueStackView extends Tab{
             Cue c = getSelected();
             if(event.getCode() == KeyCode.SPACE && c != null){
                 c.go();
+            }else if(event.getCode() == KeyCode.BACK_SPACE && c != null){
+                c.stop();
             }
         });
     }
