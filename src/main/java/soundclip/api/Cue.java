@@ -1,5 +1,6 @@
 package soundclip.api;
 
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.*;
@@ -168,7 +169,11 @@ public abstract class Cue implements Storable {
     /**
      * Stops the main cue action. Should not trigger the autoFollow cue
      */
-    public abstract void stop();
+    public void stop(){
+        if(getPreWaitTimer() != null && getPreWaitTimer().getStatus().equals(Animation.Status.RUNNING)){
+            getPreWaitTimer().stop();
+        }
+    }
 
     public ReadOnlyDoubleProperty getPostWaitProgressProperty(){
         return postWaitTimer.get().currentRateProperty();

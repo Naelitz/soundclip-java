@@ -32,18 +32,8 @@ public class MarkerCue extends Cue{
     }
 
     @Override
-    public void standBy() {
-
-    }
-
-    @Override
     protected void action() {
-
-    }
-
-    @Override
-    public void stop() {
-
+        // Marker Cues don't do anything
     }
 
     @Override

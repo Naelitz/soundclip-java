@@ -80,7 +80,7 @@ public class CueStackView extends Tab{
                     if(item.greaterThan(Duration.ZERO)){
                         setText(Utils.durationToString(item));
 
-                        double percent = 100 * (item.toMillis() / model.getActionDuration().toMillis());
+                        double percent = 100 * (item.toMillis() / model.getPreWaitDelay().toMillis());
                         setStyle("-fx-background-color: linear-gradient(" +
                                 "from 0% 100% to " + String.format("%.3f", percent) +"% 100%, " +
                                 "-progress-green, -progress-green 99.99%, transparent" +
