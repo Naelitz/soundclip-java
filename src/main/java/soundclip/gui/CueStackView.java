@@ -8,6 +8,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyCode;
 import javafx.util.Duration;
 
 import org.apache.logging.log4j.LogManager;
@@ -78,7 +79,7 @@ public class CueStackView extends Tab{
                     if(item.greaterThan(Duration.ZERO)){
                         setText(Utils.durationToString(item));
 
-                        double percent = item.toMillis() / model.getActionDuration().toMillis();
+                        double percent = 100 * (item.toMillis() / model.getActionDuration().toMillis());
                         String color = "-progress-green";
                         if(percent > 90){
                             color = "-progress-red";
@@ -87,7 +88,7 @@ public class CueStackView extends Tab{
                         }
 
                         setStyle("-fx-background-color: linear-gradient(" +
-                                "from 0% 100% to " + (percent) +"% 100%, " +
+                                "from 0% 100% to " + String.format("%.3f", percent) +"% 100%, " +
                                 color + ", " + color + " 99.99%, transparent" +
                                 ");");
                     }else{
@@ -110,7 +111,7 @@ public class CueStackView extends Tab{
                     if(item.greaterThan(Duration.ZERO)){
                         setText(Utils.durationToString(item));
 
-                        double percent = item.toMillis() / model.getActionDuration().toMillis();
+                        double percent = 100 * (item.toMillis() / model.getActionDuration().toMillis());
                         String color = "-progress-green";
                         if(percent > 90){
                             color = "-progress-red";
@@ -119,7 +120,7 @@ public class CueStackView extends Tab{
                         }
 
                         setStyle("-fx-background-color: linear-gradient(" +
-                                "from 0% 100% to " + (percent) +"% 100%, " +
+                                "from 0% 100% to " + String.format("%.3f", percent) + "% 100%, " +
                                 color + ", " + color + " 99.99%, transparent" +
                                 ");");
                     }else{
@@ -144,7 +145,7 @@ public class CueStackView extends Tab{
                     if(item.greaterThan(Duration.ZERO)){
                         setText(Utils.durationToString(item));
 
-                        double percent = item.toMillis() / model.getPostWaitDelay().toMillis();
+                        double percent = 100 * (item.toMillis() / model.getPostWaitDelay().toMillis());
                         String color = "-progress-green";
                         if(percent > 90){
                             color = "-progress-red";
@@ -153,7 +154,7 @@ public class CueStackView extends Tab{
                         }
 
                         setStyle("-fx-background-color: linear-gradient(" +
-                                "from 0% 100% to " + (percent) +"% 100%, " +
+                                "from 0% 100% to " + String.format("%.3f", percent) +"% 100%, " +
                                 color + ", " + color + " 99.99%, transparent" +
                                 ");");
                     }else{
@@ -180,6 +181,13 @@ public class CueStackView extends Tab{
             Cue c = getSelected();
             if(event.getClickCount() == 2 && c != null){
                 CueEditor.displayEditorFor(c);
+            }
+        });
+
+        tableView.setOnKeyReleased(event -> {
+            Cue c = getSelected();
+            if(event.getCode() == KeyCode.SPACE && c != null){
+                c.go();
             }
         });
     }

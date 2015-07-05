@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -23,6 +24,7 @@ import java.util.HashMap;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import soundclip.SoundClip;
 import soundclip.Utils;
 import soundclip.annotation.Automatable;
 import soundclip.annotation.CueMeta;
@@ -99,8 +101,16 @@ public class AudioCue extends Cue implements Fadeable, Resumable, ProgressProvid
         }
 
         @FXML
-        private void onFileSourceBrowseClicked(ActionEvent click){
+        private void onFileSourceClicked(ActionEvent click){
             log.debug("TODO: Open File Browser");
+            FileChooser fc = new FileChooser();
+
+            File file = fc.showOpenDialog(SoundClip.instance().getPrimaryStage());
+            if(file != null){
+                //TODO: Validate
+                source.setText(file.getAbsolutePath());
+            }
+
         }
     }
 
@@ -115,12 +125,15 @@ public class AudioCue extends Cue implements Fadeable, Resumable, ProgressProvid
 
     private void setupBackend(){
         try{
-            info = new Media(new File(source.getValue()).toURI().toString());
+            String path = new File(source.getValue()).toURI().toString();
+            log.debug("Changing source for " + getName() + " to " + path);
+            info = new Media(path);
             actionDuration.bind(info.durationProperty());
             backend = new MediaPlayer(info);
             backend.setVolume(volume.getValue());
             backend.balanceProperty().bind(pan);
         }catch(MediaException ex){
+            log.error("Error setting up the audio backend", ex);
             info = null;
             backend = null;
         }
@@ -193,6 +206,16 @@ public class AudioCue extends Cue implements Fadeable, Resumable, ProgressProvid
             t.setOnFinished(callback);
         }
         t.play();
+    }
+
+    @Override
+    public Duration getActionDuration() {
+        return info.getDuration();
+    }
+
+    @Override
+    public ReadOnlyObjectProperty<Duration> actionDurationProperty() {
+        return info.durationProperty();
     }
 
     public String getSource() {

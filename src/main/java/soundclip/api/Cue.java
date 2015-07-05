@@ -149,7 +149,11 @@ public abstract class Cue implements Storable {
      * Triggers the main cue action after the pre-wait delay has expired
      */
     public void go(){
-        preWaitTimer.get().play();
+        if(getPreWaitDelay().greaterThan(Duration.ZERO)){
+            preWaitTimer.get().play();
+        }else{
+            action();
+        }
     }
 
     public ReadOnlyObjectProperty<Duration> getPreWaitProgressProperty(){
@@ -262,7 +266,7 @@ public abstract class Cue implements Storable {
         return actionDuration.get();
     }
 
-    public ObjectProperty<Duration> actionDurationProperty() {
+    public ReadOnlyObjectProperty<Duration> actionDurationProperty() {
         return actionDuration;
     }
 

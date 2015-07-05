@@ -12,7 +12,7 @@
 
     <Label text="Source:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
     <TextField fx:id="source" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.columnSpan="2"/>
-    <Button text="..." onAction="#onFileSourceBrowseClicked" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+    <Button text="..." onAction="#onFileSourceClicked" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
 
     <Label text="Volume:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
     <Slider fx:id="volume" min="0.0" max="1.0" GridPane.columnIndex="1" GridPane.rowIndex="1"

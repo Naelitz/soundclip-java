@@ -24,7 +24,7 @@ import java.io.IOException;
 public class Utils {
 
     public static String durationToString(Duration duration){
-        if(duration.lessThanOrEqualTo(Duration.ZERO)){
+        if(duration == null || duration.lessThanOrEqualTo(Duration.ZERO)){
             return "00:00.000";
         }else if(duration.equals(Duration.UNKNOWN)){
             return "UNKNOWN";
