@@ -35,7 +35,7 @@ public class Utils {
             millis %= 60000;
 
             double seconds =(millis / 1000);
-            return String.format("%02d:%5.3f", minutes, seconds);
+            return String.format("%02d:%06.3f", minutes, seconds);
         }
     }
 
