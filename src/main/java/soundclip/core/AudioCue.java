@@ -53,6 +53,9 @@ public class AudioCue extends Cue implements Fadeable, Resumable, ProgressProvid
 
     protected StringProperty source = new SimpleStringProperty("");
 
+    private ObjectProperty<Duration> actionProgressProxy = new SimpleObjectProperty<>(Duration.UNKNOWN);
+    private ObjectProperty<Duration> actionDurationProxy = new SimpleObjectProperty<>(Duration.UNKNOWN);
+
     @Automatable(min=0.0, max=1.0, name="Volume")
     protected DoubleProperty volume = new SimpleDoubleProperty(1.0);
     @Automatable(min=-1.0, max=1.0, name="Pan")
@@ -132,6 +135,23 @@ public class AudioCue extends Cue implements Fadeable, Resumable, ProgressProvid
             backend = new MediaPlayer(info);
             backend.setVolume(volume.getValue());
             backend.balanceProperty().bind(pan);
+
+            backend.setOnReady(() -> {
+                actionDurationProxy.setValue(backend.getTotalDuration());
+                actionDurationProxy.bind(backend.totalDurationProperty());
+
+                //Trick the table into updating
+                actionProgressProxy.set(Duration.ZERO);
+                actionProgressProxy.bind(backend.currentTimeProperty());
+            });
+
+            backend.setOnEndOfMedia(() -> {
+                log.info("End of media reached for " + getSource());
+                backend.stop();
+                backend.seek(Duration.ZERO);
+
+                //TODO: Trigger autofollow
+            });
         }catch(MediaException ex){
             log.error("Error setting up the audio backend", ex);
             info = null;
@@ -166,12 +186,12 @@ public class AudioCue extends Cue implements Fadeable, Resumable, ProgressProvid
 
     @Override
     public ReadOnlyObjectProperty<Duration> progressProperty() {
-        return backend.currentTimeProperty();
+        return actionProgressProxy;
     }
 
     @Override
     public Duration getProgress() {
-        return backend.getCurrentTime();
+        return actionProgressProxy.getValue();
     }
 
     @Override
@@ -212,12 +232,12 @@ public class AudioCue extends Cue implements Fadeable, Resumable, ProgressProvid
 
     @Override
     public Duration getActionDuration() {
-        return info.getDuration();
+        return actionDurationProxy.getValue();
     }
 
     @Override
     public ReadOnlyObjectProperty<Duration> actionDurationProperty() {
-        return info.durationProperty();
+        return actionDurationProxy;
     }
 
     public String getSource() {

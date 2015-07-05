@@ -80,16 +80,9 @@ public class CueStackView extends Tab{
                         setText(Utils.durationToString(item));
 
                         double percent = 100 * (item.toMillis() / model.getActionDuration().toMillis());
-                        String color = "-progress-green";
-                        if(percent > 90){
-                            color = "-progress-red";
-                        }else if(percent > 75){
-                            color = "-progress-yellow";
-                        }
-
                         setStyle("-fx-background-color: linear-gradient(" +
                                 "from 0% 100% to " + String.format("%.3f", percent) +"% 100%, " +
-                                color + ", " + color + " 99.99%, transparent" +
+                                "-progress-green, -progress-green 99.99%, transparent" +
                                 ");");
                     }else{
                         setText(Utils.durationToString(model.getPreWaitDelay()));
@@ -112,16 +105,9 @@ public class CueStackView extends Tab{
                         setText(Utils.durationToString(item));
 
                         double percent = 100 * (item.toMillis() / model.getActionDuration().toMillis());
-                        String color = "-progress-green";
-                        if(percent > 90){
-                            color = "-progress-red";
-                        }else if(percent > 75){
-                            color = "-progress-yellow";
-                        }
-
                         setStyle("-fx-background-color: linear-gradient(" +
-                                "from 0% 100% to " + String.format("%.3f", percent) + "% 100%, " +
-                                color + ", " + color + " 99.99%, transparent" +
+                                "from 0% 100% to " + String.format("%.3f", percent) +"% 100%, " +
+                                "-progress-green, -progress-green 99.99%, transparent" +
                                 ");");
                     }else{
                         setText(Utils.durationToString(model.getActionDuration()));
@@ -146,16 +132,9 @@ public class CueStackView extends Tab{
                         setText(Utils.durationToString(item));
 
                         double percent = 100 * (item.toMillis() / model.getPostWaitDelay().toMillis());
-                        String color = "-progress-green";
-                        if(percent > 90){
-                            color = "-progress-red";
-                        }else if(percent > 75){
-                            color = "-progress-yellow";
-                        }
-
                         setStyle("-fx-background-color: linear-gradient(" +
                                 "from 0% 100% to " + String.format("%.3f", percent) +"% 100%, " +
-                                color + ", " + color + " 99.99%, transparent" +
+                                "-progress-green, -progress-green 99.99%, transparent" +
                                 ");");
                     }else{
                         setText(Utils.durationToString(model.getPostWaitDelay()));
